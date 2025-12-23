@@ -2,16 +2,12 @@ from ultralytics import YOLO
 import torch
 
 def main():
-    # ---------------------------------------------------------
-    # CONFIGURATION
-    # ---------------------------------------------------------
     PROJECT_NAME = 'mission2_obstacle_model'
     DATA_CONFIG  = 'dataset_final/data.yaml'
-    EPOCHS       = 50    # Number of times to review the data
-    IMG_SIZE     = 640   # Standard resolution for YOLO
-    BATCH_SIZE   = 8    # Reduce to 8 or 4 if you get "Out of Memory" errors
+    EPOCHS       = 50    
+    IMG_SIZE     = 640   
+    BATCH_SIZE   = 8    
     
-    # Check if GPU is available 
     device = 0 if torch.cuda.is_available() else 'cpu'
     print(f"Starting training on device: {device}")
 
@@ -27,9 +23,9 @@ def main():
             batch=BATCH_SIZE,
             device=device,
             name=PROJECT_NAME,
-            patience=10,      # Stop early if accuracy stops improving (saves time)
-            save=True,        # Save the best model automatically
-            verbose=True      # Show progress details
+            patience=10,      
+            save=True,      
+            verbose=True      
         )
         print("\nSUCCESS! Training Complete.")
         
@@ -38,4 +34,5 @@ def main():
         print("Tip: If the error is 'CUDA out of memory', change BATCH_SIZE to 8 or 4.")
 
 if __name__ == '__main__':
+
     main()
